@@ -77,11 +77,8 @@ PRODUCT_COPY_FILES += \
 
 # Boot control
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.1-impl-qti \
-    android.hardware.boot@1.1-impl-qti.recovery \
-    android.hardware.boot@1.1-service \
-    bootctrl.holi \
-    bootctrl.holi.recovery
+    android.hardware.boot-service.qti \
+    android.hardware.boot-service.qti.recovery
 
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
@@ -163,7 +160,6 @@ PRODUCT_PACKAGES += \
     libsdmutils \
     libtinyxml \
     libvulkan \
-    memtrack.default \
     vendor.display.config@1.15 \
     vendor.display.config@1.15.vendor \
     vendor.display.config@2.0 \
@@ -274,6 +270,11 @@ PRODUCT_PACKAGES += \
     libavservices_minijail.vendor \
     libcodec2_hidl@1.0.vendor
 
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH) \
+    hardware/motorola
+
 # Moto hardware
 PRODUCT_PACKAGES += \
     MotoActions \
@@ -297,17 +298,17 @@ PRODUCT_PACKAGES += \
     Tag \
     nfc_nci.st21nfc.default
 
-# OMX
-PRODUCT_PACKAGES += \
-    libcodec2_hidl@1.0.vendor \
-    libcodec2_vndk.vendor \
-    libOmxAacEnc \
-    libOmxAmrEnc \
-    libOmxCore \
-    libOmxEvrcEnc \
-    libOmxG711Enc \
-    libOmxQcelp13Enc \
-    libstagefrighthw
+# # OMX
+# PRODUCT_PACKAGES += \
+#     libcodec2_hidl@1.0.vendor \
+#     libcodec2_vndk.vendor \
+#     libOmxAacEnc \
+#     libOmxAmrEnc \
+#     libOmxCore \
+#     libOmxEvrcEnc \
+#     libOmxG711Enc \
+#     libOmxQcelp13Enc \
+#     libstagefrighthw
 
 # Perf
 PRODUCT_PACKAGES += \
@@ -392,10 +393,6 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-service.multihal \
     libsensorndkbridge
 
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
-
 # Telephony
 PRODUCT_PACKAGES += \
     ims-ext-common \
@@ -414,9 +411,7 @@ PRODUCT_COPY_FILES += \
 
 # Thermal
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.qti \
-    android.hardware.thermal@2.0 \
-    android.hardware.thermal@2.0.vendor
+    android.hardware.thermal-service.qti
 
 # Trusted UI
 PRODUCT_PACKAGES += \
@@ -434,7 +429,8 @@ PRODUCT_PACKAGES_DEBUG += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service-qti \
+    android.hardware.usb-service.qti \
+    android.hardware.usb.gadget-service.qti \
     init.qcom.usb.rc \
     init.qcom.usb.sh
 
@@ -456,18 +452,15 @@ PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := strict
 
 # WiFi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
-    hostapd \
+    android.hardware.wifi@1.0 \
+    android.hardware.wifi.supplicant@1.0 \
+    android.hardware.wifi.hostapd@1.0 \
     libqsap_sdk \
     libwpa_client \
     libwifi-hal-ctrl \
     libwifi-hal-qcom \
-    vendor.qti.hardware.wifi.hostapd@1.0.vendor \
-    vendor.qti.hardware.wifi.hostapd@1.1.vendor \
-    vendor.qti.hardware.wifi.hostapd@1.2.vendor \
-    vendor.qti.hardware.wifi.supplicant@2.0.vendor \
-    vendor.qti.hardware.wifi.supplicant@2.1.vendor \
-    vendor.qti.hardware.wifi.supplicant@2.2.vendor \
+    vendor.qti.hardware.wifi.hostapd@1.0 \
+    vendor.qti.hardware.wifi.supplicant@1.0 \
     wpa_supplicant \
     wpa_supplicant.conf
 
