@@ -22,8 +22,4 @@ PRODUCT_MODEL := moto g71 5G
 
 PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    TARGET_PRODUCT=corfur_g \
-    PRIVATE_BUILD_DESC="corfur_g-user 12 S2RUBS32M.51-15-9-3 c0d7f-cd476e release-keys"
-
 BUILD_FINGERPRINT := motorola/corfur_g/corfur:12/S2RUBS32M.51-15-9-3/cd476e:user/release-keys
