@@ -482,3 +482,6 @@ PRODUCT_BOOT_JARS += \
 
 # Inherit from vendor blobs
 $(call inherit-product, vendor/motorola/corfur/corfur-vendor.mk)
+
+# Enable UFFD GC explicitly (needed for kernel 5.4+)
+PRODUCT_ENABLE_UFFD_GC := true

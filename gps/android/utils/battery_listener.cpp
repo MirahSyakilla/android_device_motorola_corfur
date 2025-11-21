@@ -92,8 +92,9 @@ status_t BatteryListenerImpl::init()
 {
     int tries = 0;
 
-    if (mHealth != NULL)
+    if (mHealth != NULL) {
         return INVALID_OPERATION;
+    }
 
     do {
         mHealth = IHealth::getService();
@@ -182,18 +183,15 @@ BatteryListenerImpl::BatteryListenerImpl(cb_fn_t cb) :
 
 BatteryListenerImpl::~BatteryListenerImpl()
 {
-    {
-        std::lock_guard<std::mutex> _l(mLock);
-        if (mHealth != NULL)
-            mHealth->unregisterCallback(this);
-            auto r = mHealth->unlinkToDeath(this);
-            if (!r.isOk() || r == false) {
-                LOC_LOGe("Transaction error in unregister to HealthHAL death: %s",
-                        r.description().c_str());
-            }
+    std::lock_guard<std::mutex> _l(mLock);
+    if (mHealth != NULL) {
+        mHealth->unregisterCallback(this);
+        auto r = mHealth->unlinkToDeath(this);
+        if (!r.isOk() || r == false) {
+            LOC_LOGe("Transaction error in unregister to HealthHAL death: %s",
+                    r.description().c_str());
+        }
     }
-    mDone = true;
-    mThread->join();
 }
 
 void BatteryListenerImpl::serviceDied(uint64_t cookie __unused,
