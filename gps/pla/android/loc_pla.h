@@ -40,9 +40,22 @@ extern "C" {
 #endif
 
 #include <cutils/properties.h>
-#include <cutils/threads.h>
-#include <cutils/sched_policy.h>
-#include <cutils/android_filesystem_config.h>
+#include <pthread.h>
+#include <unistd.h>
+
+// Replacement for removed cutils/android_filesystem_config.h
+#include <private/android_filesystem_config.h>
+
+// Replacement for removed cutils/sched_policy.h
+#include <processgroup/sched_policy.h>
+
+// Shim for cutils/threads.h
+typedef pthread_t android_thread_id_t;
+static inline android_thread_id_t androidGetTid() {
+    return gettid();
+}
+
+
 #include <string.h>
 #include <stdlib.h>
 

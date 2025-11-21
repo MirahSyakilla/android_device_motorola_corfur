@@ -4,7 +4,7 @@ cc_library_shared {
     name: "libgps.utils",
     vendor: true,
 
-
+    include_dirs: ["device/motorola/corfur/gps/pla/android"],
 
     //# Libs
     shared_libs: [

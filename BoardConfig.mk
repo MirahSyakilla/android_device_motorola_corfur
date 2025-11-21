@@ -31,14 +31,30 @@ TARGET_NO_BOOTLOADER := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
-# Kernel
+
+# Kernel source + defconfig
 TARGET_KERNEL_SOURCE := kernel/motorola/sm6375
 TARGET_KERNEL_CONFIG := holi-qgki_defconfig
-# Remove prebuilt kernel flags
-# TARGET_FORCE_PREBUILT_KERNEL := true
-# TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)-kernel/kernel
-# TARGET_PREBUILT_DTB := $(DEVICE_PATH)-kernel/dtb.img
-# PRODUCT_COPY_FILES entries for prebuilt kernel can be removed
+# Output kernel format (your build produces `Image`)
+BOARD_KERNEL_IMAGE_NAME := Image
+# Boot image format
+BOARD_BOOT_HEADER_VERSION := 3
+BOARD_KERNEL_PAGESIZE := 4096
+# DTB & DTBO are separate
+BOARD_KERNEL_SEPARATED_DTBO := true
+# Kernel command line
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8
+BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom androidboot.console=ttyMSM0
+BOARD_KERNEL_CMDLINE += androidboot.memcg=1 lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE += video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237
+BOARD_KERNEL_CMDLINE += service_locator.enable=1 androidboot.usbcontroller=4e00000.dwc3
+BOARD_KERNEL_CMDLINE += swiotlb=0 loop.max_part=7 cgroup.memory=nokmem,nosocket
+BOARD_KERNEL_CMDLINE += iptable_raw.raw_before_defrag=1 ip6table_raw.raw_before_defrag=1
+BOARD_KERNEL_CMDLINE += androidboot.hab.csv=8 androidboot.hab.cid=50
+BOARD_KERNEL_CMDLINE += androidboot.hab.product=corfur
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
+# mkbootimg arguments
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
